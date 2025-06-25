@@ -59,11 +59,11 @@ button {
     background-color: #45a049;
 }
 
-#reset_button {
+#Reset { /* Changed ID to 'Reset' */
     background-color: #f44336;
     color: white;
 }
 
-#reset_button:hover {
+#Reset:hover {
     background-color: #da190b;
 }

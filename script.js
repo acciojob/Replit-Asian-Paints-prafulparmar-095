@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const blockIdInput = document.getElementById('block_id');
     const colourIdInput = document.getElementById('colour_id');
     const changeButton = document.getElementById('change_button');
-    const resetButton = document.getElementById('reset_button');
+    const resetButton = document.getElementById('Reset'); // Changed ID to 'Reset'
     const gridItems = document.querySelectorAll('.grid-item');
 
     const resetAllGridColors = () => {
@@ -26,11 +26,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
         resetAllGridColors();
 
-        const selectedGridItem = document.getElementById(`item-${blockId}`);
+        // Select the specific grid item using the numeric ID directly
+        const selectedGridItem = document.getElementById(blockId.toString());
         if (selectedGridItem) {
             selectedGridItem.style.backgroundColor = newColor;
         } else {
-            console.error(`Grid item with ID 'item-${blockId}' not found.`);
+            console.error(`Grid item with ID '${blockId}' not found.`);
         }
     });
 
