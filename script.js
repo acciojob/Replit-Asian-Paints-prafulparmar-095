@@ -1,95 +1,42 @@
-// Get references to HTML elements
-const gridContainer = document.getElementById('grid-container');
-const blockIdInput = document.getElementById('block_id');
-const colourIdInput = document.getElementById('colour_id');
-const changeButton = document.getElementById('change_button');
-const resetButton = document.getElementById('Reset');
-
-// Function to create grid items dynamically
-function createGrid() {
-    for (let i = 1; i <= 9; i++) {
-        const gridItem = document.createElement('div');
-        // Reverting to the original instruction: "id as the number assigned to it."
-        gridItem.id = String(i); // Assign ID as just the number (1, 2, 3...)
-        // Ensure the class 'grid-item' is present as requested
-        gridItem.className = 'grid-item h-24 text-2xl font-semibold text-gray-700 rounded-lg'; // Tailwind classes for styling
-        gridItem.textContent = i; // Display the number inside the grid item
-        gridContainer.appendChild(gridItem);
-    }
-}
-
-// Function to reset all grid items to transparent background
-function resetGridColors() {
-    // Select all elements with the class 'grid-item'
+document.addEventListener('DOMContentLoaded', () => {
+    const blockIdInput = document.getElementById('block_id');
+    const colourIdInput = document.getElementById('colour_id');
+    const changeButton = document.getElementById('change_button');
+    const resetButton = document.getElementById('reset_button');
     const gridItems = document.querySelectorAll('.grid-item');
-    gridItems.forEach(item => {
-        item.style.backgroundColor = 'transparent'; // Set background to transparent
+
+    const resetAllGridColors = () => {
+        gridItems.forEach(item => {
+            item.style.backgroundColor = 'transparent';
+        });
+    };
+
+    changeButton.addEventListener('click', () => {
+        const blockId = parseInt(blockIdInput.value);
+        const newColor = colourIdInput.value.trim();
+
+        if (isNaN(blockId) || blockId < 1 || blockId > 9) {
+            alert('Please enter a valid Block ID between 1 and 9.');
+            return;
+        }
+        if (!newColor) {
+            alert('Please enter a color.');
+            return;
+        }
+
+        resetAllGridColors();
+
+        const selectedGridItem = document.getElementById(`item-${blockId}`);
+        if (selectedGridItem) {
+            selectedGridItem.style.backgroundColor = newColor;
+        } else {
+            console.error(`Grid item with ID 'item-${blockId}' not found.`);
+        }
     });
-}
 
-// Event listener for the "Change Color" button
-changeButton.addEventListener('click', () => {
-    const blockId = parseInt(blockIdInput.value); // Get the entered block ID as an integer
-    const color = colourIdInput.value.trim(); // Get the entered color and remove leading/trailing whitespace
-
-    // Input validation
-    if (isNaN(blockId) || blockId < 1 || blockId > 9) {
-        alertBox("Please enter a valid Block ID between 1 and 9.");
-        return;
-    }
-    if (!color) {
-        alertBox("Please enter a color.");
-        return;
-    }
-
-    // Reset all colors first
-    resetGridColors();
-
-    // Find the specific grid item using its simple numeric ID and change its background color
-    const targetGridItem = document.getElementById(String(blockId));
-    if (targetGridItem) {
-        targetGridItem.style.backgroundColor = color; // Apply the new color
-    } else {
-        alertBox("Grid item not found. This should not happen with valid IDs.");
-    }
+    resetButton.addEventListener('click', () => {
+        resetAllGridColors();
+        blockIdInput.value = '';
+        colourIdInput.value = '';
+    });
 });
-
-// Event listener for the "Reset" button
-resetButton.addEventListener('click', () => {
-    resetGridColors(); // Reset all grid colors
-    blockIdInput.value = ''; // Clear the block ID input
-    colourIdInput.value = ''; // Clear the color input
-});
-
-// Custom alert box implementation
-function alertBox(message) {
-    const existingAlert = document.getElementById('custom-alert');
-    if (existingAlert) {
-        existingAlert.remove(); // Remove existing alert if any
-    }
-
-    const alertDiv = document.createElement('div');
-    alertDiv.id = 'custom-alert';
-    alertDiv.className = 'fixed top-4 left-1/2 -translate-x-1/2 bg-blue-600 text-white px-6 py-3 rounded-lg shadow-xl z-50 transition-all duration-300 ease-in-out transform scale-0 opacity-0';
-    alertDiv.textContent = message;
-
-    document.body.appendChild(alertDiv);
-
-    // Animate in
-    setTimeout(() => {
-        alertDiv.style.transform = 'translate(-50%, 0) scale(1)';
-        alertDiv.style.opacity = '1';
-    }, 10);
-
-    // Animate out after 3 seconds
-    setTimeout(() => {
-        alertDiv.style.transform = 'translate(-50%, -20px) scale(0.9)';
-        alertDiv.style.opacity = '0';
-        setTimeout(() => {
-            alertDiv.remove();
-        }, 300); // Allow time for transition before removing
-    }, 3000);
-}
-
-// Initialize the grid when the script loads
-createGrid();
