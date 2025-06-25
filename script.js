@@ -1,4 +1,3 @@
-// Get references to HTML elements
 const gridContainer = document.getElementById('grid-container');
 const blockIdInput = document.getElementById('block_id');
 const colourIdInput = document.getElementById('colour_id');
@@ -9,9 +8,10 @@ const resetButton = document.getElementById('Reset');
 function createGrid() {
     for (let i = 1; i <= 9; i++) {
         const gridItem = document.createElement('div');
-        gridItem.id = i; // Assign ID based on the number
-        // Tailwind classes for styling (h-24, text-2xl, font-semibold, text-gray-700, rounded-lg)
-        gridItem.className = 'grid-item h-24 text-2xl font-semibold text-gray-700 rounded-lg';
+        // Assign ID in the format "grid-item-X"
+        gridItem.id = `grid-item-${i}`;
+        // Add the class 'grid-item' as specified
+        gridItem.className = 'grid-item h-24 text-2xl font-semibold text-gray-700 rounded-lg'; // Tailwind classes for styling
         gridItem.textContent = i; // Display the number inside the grid item
         gridContainer.appendChild(gridItem);
     }
@@ -19,7 +19,7 @@ function createGrid() {
 
 // Function to reset all grid items to transparent background
 function resetGridColors() {
-    const gridItems = document.querySelectorAll('.grid-item');
+    const gridItems = document.querySelectorAll('.grid-item'); // Select all elements with the class 'grid-item'
     gridItems.forEach(item => {
         item.style.backgroundColor = 'transparent'; // Set background to transparent
     });
@@ -43,8 +43,8 @@ changeButton.addEventListener('click', () => {
     // Reset all colors first
     resetGridColors();
 
-    // Find the specific grid item and change its background color
-    const targetGridItem = document.getElementById(String(blockId)); // Get the element by its ID
+    // Find the specific grid item using the updated ID format and change its background color
+    const targetGridItem = document.getElementById(`grid-item-${blockId}`);
     if (targetGridItem) {
         targetGridItem.style.backgroundColor = color; // Apply the new color
     } else {
@@ -68,7 +68,6 @@ function alertBox(message) {
 
     const alertDiv = document.createElement('div');
     alertDiv.id = 'custom-alert';
-    // Tailwind classes for styling the alert (fixed, top-4, left-1/2, -translate-x-1/2, bg-blue-600, text-white, px-6, py-3, rounded-lg, shadow-xl, z-50, transition-all, duration-300, ease-in-out, transform, scale-0, opacity-0)
     alertDiv.className = 'fixed top-4 left-1/2 -translate-x-1/2 bg-blue-600 text-white px-6 py-3 rounded-lg shadow-xl z-50 transition-all duration-300 ease-in-out transform scale-0 opacity-0';
     alertDiv.textContent = message;
 
@@ -92,4 +91,3 @@ function alertBox(message) {
 
 // Initialize the grid when the script loads
 createGrid();
-
