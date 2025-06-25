@@ -1,3 +1,4 @@
+// Get references to HTML elements
 const gridContainer = document.getElementById('grid-container');
 const blockIdInput = document.getElementById('block_id');
 const colourIdInput = document.getElementById('colour_id');
@@ -8,9 +9,9 @@ const resetButton = document.getElementById('Reset');
 function createGrid() {
     for (let i = 1; i <= 9; i++) {
         const gridItem = document.createElement('div');
-        // Assign ID in the format "grid-item-X"
-        gridItem.id = `grid-item-${i}`;
-        // Add the class 'grid-item' as specified
+        // Reverting to the original instruction: "id as the number assigned to it."
+        gridItem.id = String(i); // Assign ID as just the number (1, 2, 3...)
+        // Ensure the class 'grid-item' is present as requested
         gridItem.className = 'grid-item h-24 text-2xl font-semibold text-gray-700 rounded-lg'; // Tailwind classes for styling
         gridItem.textContent = i; // Display the number inside the grid item
         gridContainer.appendChild(gridItem);
@@ -19,7 +20,8 @@ function createGrid() {
 
 // Function to reset all grid items to transparent background
 function resetGridColors() {
-    const gridItems = document.querySelectorAll('.grid-item'); // Select all elements with the class 'grid-item'
+    // Select all elements with the class 'grid-item'
+    const gridItems = document.querySelectorAll('.grid-item');
     gridItems.forEach(item => {
         item.style.backgroundColor = 'transparent'; // Set background to transparent
     });
@@ -43,8 +45,8 @@ changeButton.addEventListener('click', () => {
     // Reset all colors first
     resetGridColors();
 
-    // Find the specific grid item using the updated ID format and change its background color
-    const targetGridItem = document.getElementById(`grid-item-${blockId}`);
+    // Find the specific grid item using its simple numeric ID and change its background color
+    const targetGridItem = document.getElementById(String(blockId));
     if (targetGridItem) {
         targetGridItem.style.backgroundColor = color; // Apply the new color
     } else {
