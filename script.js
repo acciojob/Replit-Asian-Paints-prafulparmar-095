@@ -1,12 +1,12 @@
-const changeBtn = document.getElementById('change_button');
-const resetBtn = document.getElementById('Reset');
+const changeButton = document.getElementById("change_button");
+const resetButton = document.getElementById("Reset");
 
-changeBtn.addEventListener('click', () => {
-  const blockId = document.getElementById('block_id').value;
-  const color = document.getElementById('colour_id').value;
+changeButton.addEventListener("click", () => {
+  const blockId = document.getElementById("block_id").value;
+  const color = document.getElementById("colour_id").value;
 
   for (let i = 1; i <= 9; i++) {
-    document.getElementById(String(i)).style.backgroundColor = 'transparent';
+    document.getElementById(i.toString()).style.backgroundColor = "transparent";
   }
 
   const block = document.getElementById(blockId);
@@ -15,8 +15,8 @@ changeBtn.addEventListener('click', () => {
   }
 });
 
-resetBtn.addEventListener('click', () => {
+resetButton.addEventListener("click", () => {
   for (let i = 1; i <= 9; i++) {
-    document.getElementById(String(i)).style.backgroundColor = 'transparent';
+    document.getElementById(i.toString()).style.backgroundColor = "transparent";
   }
 });
