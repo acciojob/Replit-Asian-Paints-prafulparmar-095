@@ -1,43 +1,22 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const blockIdInput = document.getElementById('block_id');
-    const colourIdInput = document.getElementById('colour_id');
-    const changeButton = document.getElementById('change_button');
-    const resetButton = document.getElementById('Reset'); // Changed ID to 'Reset'
-    const gridItems = document.querySelectorAll('.grid-item');
+const changeBtn = document.getElementById('change_button');
+const resetBtn = document.getElementById('Reset');
 
-    const resetAllGridColors = () => {
-        gridItems.forEach(item => {
-            item.style.backgroundColor = 'transparent';
-        });
-    };
+changeBtn.addEventListener('click', () => {
+  const blockId = document.getElementById('block_id').value;
+  const color = document.getElementById('colour_id').value;
 
-    changeButton.addEventListener('click', () => {
-        const blockId = parseInt(blockIdInput.value);
-        const newColor = colourIdInput.value.trim();
+  for (let i = 1; i <= 9; i++) {
+    document.getElementById(String(i)).style.backgroundColor = 'transparent';
+  }
 
-        if (isNaN(blockId) || blockId < 1 || blockId > 9) {
-            alert('Please enter a valid Block ID between 1 and 9.');
-            return;
-        }
-        if (!newColor) {
-            alert('Please enter a color.');
-            return;
-        }
+  const block = document.getElementById(blockId);
+  if (block) {
+    block.style.backgroundColor = color;
+  }
+});
 
-        resetAllGridColors();
-
-        // Select the specific grid item using the numeric ID directly
-        const selectedGridItem = document.getElementById(blockId.toString());
-        if (selectedGridItem) {
-            selectedGridItem.style.backgroundColor = newColor;
-        } else {
-            console.error(`Grid item with ID '${blockId}' not found.`);
-        }
-    });
-
-    resetButton.addEventListener('click', () => {
-        resetAllGridColors();
-        blockIdInput.value = '';
-        colourIdInput.value = '';
-    });
+resetBtn.addEventListener('click', () => {
+  for (let i = 1; i <= 9; i++) {
+    document.getElementById(String(i)).style.backgroundColor = 'transparent';
+  }
 });

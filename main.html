@@ -1,36 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Replit Asian Paints</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Replit Asian Paints</title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-    <h1>Replit Asian Paints</h1>
 
-    <div id="grid-container">
-        <div id="1" class="grid-item">1</div>
-        <div id="2" class="grid-item">2</div>
-        <div id="3" class="grid-item">3</div>
-        <div id="4" class="grid-item">4</div>
-        <div id="5" class="grid-item">5</div>
-        <div id="6" class="grid-item">6</div>
-        <div id="7" class="grid-item">7</div>
-        <div id="8" class="grid-item">8</div>
-        <div id="9" class="grid-item">9</div>
-    </div>
+  <div id="grid-container">
+    <div class="grid-item" id="1">1</div>
+    <div class="grid-item" id="2">2</div>
+    <div class="grid-item" id="3">3</div>
+    <div class="grid-item" id="4">4</div>
+    <div class="grid-item" id="5">5</div>
+    <div class="grid-item" id="6">6</div>
+    <div class="grid-item" id="7">7</div>
+    <div class="grid-item" id="8">8</div>
+    <div class="grid-item" id="9">9</div>
+  </div>
 
-    <div class="controls">
-        <label for="block_id">Block ID (1-9):</label>
-        <input type="number" id="block_id" min="1" max="9" placeholder="e.g., 3">
+  <input type="text" id="block_id" placeholder="Enter block ID (1-9)" />
+  <input type="text" id="colour_id" placeholder="Enter color (e.g. red)" />
+  <button id="change_button">Change Color</button>
+  <button id="Reset">Reset</button>
 
-        <label for="colour_id">Color:</label>
-        <input type="text" id="colour_id" placeholder="e.g., red, #FF0000">
-
-        <button id="change_button">Change Color</button>
-        <button id="Reset">Reset</button> </div>
-
-    <script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
